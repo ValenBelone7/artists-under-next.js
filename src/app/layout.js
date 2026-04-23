@@ -14,11 +14,11 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={`${geist.className} bg-black text-white min-h-screen flex flex-col`}>
 
-        {/* NAVBAR */}
+        {/* Barra de navegacion fija */}
         <nav className="w-full border-b-4 border-[#39FF14] bg-black px-6 py-4">
           <div className="max-w-6xl mx-auto flex items-center justify-between">
 
-            {/* Logo */}
+            {/* Logo con ida al home */}
             <Link
               href="/"
               className="text-2xl font-black uppercase tracking-widest"
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
               UNDER<span className="text-[#FF2D78]">FECHAS</span>
             </Link>
 
-            {/* Links */}
+            {/* Links del nav */}
             <ul className="flex items-center gap-8">
               {[
                 { href: "/", label: "Home" },
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
           </div>
         </nav>
 
-        {/* CONTENIDO */}
+        {/* Contenido de las otras paginas */}
         <main className="flex-1">
           {children}
         </main>
