@@ -1,12 +1,5 @@
 import Link from "next/link";
-
-const artistas = [
-  { slug: "los-tormentos", nombre: "Los Tormentos", genero: "Punk / Hardcore", ciudad: "Buenos Aires" },
-  { slug: "vortex-negro", nombre: "Vórtex Negro", genero: "Metal / Sludge", ciudad: "Córdoba" },
-  { slug: "la-grieta", nombre: "La Grieta", genero: "Post-punk / Noise", ciudad: "Rosario" },
-  { slug: "electrochoque", nombre: "Electrochoque", genero: "Industrial / EBM", ciudad: "Buenos Aires" },
-  { slug: "ruido-blanco", nombre: "Ruido Blanco", genero: "Ambient / Drone", ciudad: "Mendoza" },
-];
+import { artistas } from "@/lib/data";
 
 export default function ArtistasPage() {
   return (
