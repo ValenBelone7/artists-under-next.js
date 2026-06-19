@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ProximasFechasClient from "./ProximasFechasClient";
 
 export default function Home() {
   return (
@@ -34,7 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Próximas fechas placeholder */}
+      {/* Próximas fechas */}
       <section className="flex flex-col gap-4">
         <h2
           className="text-2xl font-black uppercase tracking-widest text-[#FF2D78]"
@@ -42,9 +43,7 @@ export default function Home() {
         >
           Próximas fechas
         </h2>
-        <p className="text-gray-500 text-sm" style={{ fontFamily: "'Courier New', monospace" }}>
-          — Próximamente —
-        </p>
+        <ProximasFechasClient />
       </section>
 
     </div>
