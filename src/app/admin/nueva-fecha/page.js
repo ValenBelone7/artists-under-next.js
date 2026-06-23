@@ -1,4 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useArtistas } from "@/app/context/ArtistasContext";
+
 export default function NuevaFechaPage() {
+  const { addFecha } = useArtistas();
+  const router = useRouter();
+
+  const [form, setForm] = useState({
+    artista: "",
+    fecha: "",
+    lugar: "",
+    ciudad: "",
+    precio: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addFecha(form);
+    router.push("/fechas");
+  };
+
   return (
     <div className="flex flex-col gap-8 max-w-xl">
 
@@ -9,92 +36,35 @@ export default function NuevaFechaPage() {
         Nueva fecha
       </h1>
 
-      <form className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="artista"
-            className="text-xs uppercase tracking-widest text-gray-400"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          >
-            Artista
-          </label>
-          <input
-            id="artista"
-            name="artista"
-            type="text"
-            className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="fecha"
-            className="text-xs uppercase tracking-widest text-gray-400"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          >
-            Fecha
-          </label>
-          <input
-            id="fecha"
-            name="fecha"
-            type="date"
-            className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="lugar"
-            className="text-xs uppercase tracking-widest text-gray-400"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          >
-            Lugar
-          </label>
-          <input
-            id="lugar"
-            name="lugar"
-            type="text"
-            className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="ciudad"
-            className="text-xs uppercase tracking-widest text-gray-400"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          >
-            Ciudad
-          </label>
-          <input
-            id="ciudad"
-            name="ciudad"
-            type="text"
-            className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="precio"
-            className="text-xs uppercase tracking-widest text-gray-400"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          >
-            Precio ($ o "Gratis")
-          </label>
-          <input
-            id="precio"
-            name="precio"
-            type="text"
-            className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
-            style={{ fontFamily: "'Courier New', monospace" }}
-          />
-        </div>
+        {[
+          { id: "artista", label: "Artista", type: "text" },
+          { id: "fecha", label: "Fecha", type: "date" },
+          { id: "lugar", label: "Lugar", type: "text" },
+          { id: "ciudad", label: "Ciudad", type: "text" },
+          { id: "precio", label: "Precio ($ o \"Gratis\")", type: "text" },
+        ].map(({ id, label, type }) => (
+          <div key={id} className="flex flex-col gap-2">
+            <label
+              htmlFor={id}
+              className="text-xs uppercase tracking-widest text-gray-400"
+              style={{ fontFamily: "'Courier New', monospace" }}
+            >
+              {label}
+            </label>
+            <input
+              id={id}
+              name={id}
+              type={type}
+              value={form[id]}
+              onChange={handleChange}
+              required
+              className="bg-black border border-gray-700 px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors"
+              style={{ fontFamily: "'Courier New', monospace" }}
+            />
+          </div>
+        ))}
 
         <button
           type="submit"
