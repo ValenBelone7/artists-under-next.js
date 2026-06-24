@@ -12,7 +12,6 @@ export function ArtistasProvider({ children }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const savedArtistas = localStorage.getItem("under_artistas");
     const savedFechas = localStorage.getItem("under_fechas");
     const savedFavoritos = localStorage.getItem("under_favoritos");
@@ -23,6 +22,8 @@ export function ArtistasProvider({ children }) {
 
     if (!savedArtistas) localStorage.setItem("under_artistas", JSON.stringify(defaultArtistas));
     if (!savedFechas) localStorage.setItem("under_fechas", JSON.stringify(defaultFechas));
+
+    setIsMounted(true);
   }, []);
 
   const saveArtistas = (nuevos) => {

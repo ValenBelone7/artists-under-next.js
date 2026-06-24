@@ -32,14 +32,16 @@ Una aplicación web para descubrir artistas, fechas y todo lo que necesitas sabe
 - **Rutas base implementadas:**
   - `/` - Página principal
   - `/artistas` - Listado de artistas
+  - `/fechas` - Listado de fechas/shows
+  - `/buscar` - Búsqueda de artistas en Discogs API
   - `/contacto` - Formulario de contacto
   - `/admin` - Panel administrativo
-- **Ruta anidada:** `/admin` con layout propio
+- **Rutas anidadas:** `/admin/nuevo-artista`, `/admin/nueva-fecha`
 - **Ruta dinámica:** `/artistas/[slug]` para perfiles individuales
 - **Navegación:** Uso del componente `Link` de Next.js en todos los enlaces
 
 ### 2. Configuración de Layouts
-- **Barra de navegación:** Fija, con logo y menú principal
+- **Barra de navegación:** Fija, con logo y menú principal (componente reutilizable)
 - **Pie de página:** Con información del proyecto y branding
 - **Layout anidado:** Layout específico para rutas de administración
 
@@ -88,6 +90,11 @@ src/app/
 │   ├── page.js           # Listado de artistas
 │   └── [slug]/
 │       └── page.js       # Perfil dinámico de artista
+├── fechas/
+│   ├── page.js           # Listado de fechas
+│   └── FechasClient.jsx  # Cliente para renderizar fechas
+├── buscar/
+│   └── page.js           # Búsqueda de artistas en Discogs API
 ├── contacto/
 │   └── page.js           # Formulario de contacto
 └── admin/
@@ -98,6 +105,28 @@ src/app/
     └── nueva-fecha/
         └── page.js       # Formulario nueva fecha
 ```
+
+src/components/
+├── ArtistaCard.jsx       # Tarjeta de artista (Server Component)
+├── FechaCard.jsx         # Tarjeta de fecha (Server Component)
+├── FavButton.jsx         # Botón de favoritos (Client Component)
+├── SearchBar.jsx         # Barra de búsqueda (Client Component)
+├── DiscogsCard.jsx       # Tarjeta de resultados de Discogs (Server Component)
+└── Navbar.jsx            # Barra de navegación (Client Component)
+
+src/app/
+├── ProximasFechasClient.jsx  # Cliente para mostrar próximas fechas
+├── artistas/
+│   └── ArtistasClient.jsx    # Cliente para filtrar artistas
+└── context/
+    └── ArtistasContext.jsx   # Contexto global con localStorage
+
+src/lib/
+└── data.js                # Datos iniciales de artistas y fechas
+
+src/app/api/
+└── discogs/
+    └── route.js          # API Route proxy para Discogs API
 
 ---
 
